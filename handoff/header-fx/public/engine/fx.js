@@ -124,7 +124,30 @@
     update();
   }
 
-  function init() { initLogo(); initToTop(); }
+  /* ---------- 3. Hiện dần các khối [data-fx-reveal] khi cuộn tới ---------- */
+  function initReveal() {
+    var els = document.querySelectorAll("[data-fx-reveal]");
+    if (!els.length || !("IntersectionObserver" in window)) return;
+    doc.classList.add("fx-reveal-on");
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (!entries[i].isIntersecting) continue;
+        var el = entries[i].target;
+        el.classList.add("is-in");
+        io.unobserve(el);
+        // Hiện xong thì bỏ độ trễ so le, để hiệu ứng rê chuột phản hồi ngay
+        setTimeout(function (x) { return function () { x.style.removeProperty("--fx-delay"); }; }(el), 900);
+      }
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+    for (var i = 0; i < els.length; i++) {
+      // Các thẻ cùng một lưới hiện so le nhau một chút
+      var sib = els[i].parentNode ? Array.prototype.indexOf.call(els[i].parentNode.children, els[i]) : 0;
+      if (els[i].tagName === "LI") els[i].style.setProperty("--fx-delay", (sib % 3) * 0.08 + "s");
+      io.observe(els[i]);
+    }
+  }
+
+  function init() { initLogo(); initToTop(); initReveal(); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 })();

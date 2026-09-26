@@ -5,7 +5,9 @@ Có hai hiệu ứng, áp dụng cho worker `filepdf`:
 1. **Logo bay:** logo lớn (khoảng 2,5 lần logo header) nằm giữa hero, phía trên dòng "Chúng tôi giúp việc xử lý tài liệu…". Khi cuộn xuống, logo lướt lên góc trái và thu nhỏ dần, cuối cùng khớp đúng chỗ logo header. Cuộn lên thì logo bay ngược lại. Chuyển động có easing và quán tính nhẹ. Hiệu ứng tự tắt quán tính nếu máy bật chế độ giảm chuyển động (reduced motion).
 2. **Nút lên đầu trang:** nút tròn màu tím ở góc dưới phải, có vòng hiển thị tiến độ cuộn. Nút hiện khi đã cuộn xuống quá khoảng nửa màn hình. Bấm vào thì trang cuộn mượt lên đầu, và khi về tới đầu trang thì nút tự ẩn. Nút có ở mọi trang.
 
-Xem thử: mở `demo.html` bằng trình duyệt. Đây là bản mô phỏng header và hero, dùng logo giả.
+Xem thử: mở `demo.html` bằng trình duyệt. Đây là bản mô phỏng header và hero, dùng logo giả. Thêm `?dark` vào cuối đường dẫn để xem chế độ tối. Demo có kèm khu "Tại sao nên chọn FileCustom?" ở `../why-section`.
+
+`fx.js` còn xử lý hiệu ứng hiện dần cho mọi phần tử có thuộc tính `data-fx-reveal`, do khu `why-section` dùng.
 
 ## Tích hợp vào mã nguồn worker `filepdf` (4 bước)
 

@@ -1,0 +1,66 @@
+/* ===== Khu "Tại sao nên chọn FileCustom?" =====
+ * Màu chữ/nền kế thừa từ theme hiện tại (currentColor), nên tự hợp cả chế độ sáng lẫn tối. */
+.fp-why {
+  --why-accent: #4f46e5;
+  /* Tím pha với màu chữ hiện tại: nền sáng thì tím đậm, nền tối thì tím sáng — đủ tương phản ở cả hai */
+  --why-ink: color-mix(in srgb, var(--why-accent) 72%, currentColor);
+  max-width: 1180px;
+  margin: 96px auto 80px;
+  padding: 0 24px;
+}
+.fp-why-head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+.fp-why-head h2 { font-size: clamp(28px, 3.4vw, 42px); line-height: 1.2; margin: 0 0 12px; }
+.fp-why-head p { margin: 0; font-size: 18px; opacity: .72; }
+.fp-why-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.fp-why-item {
+  padding: 28px 26px;
+  border-radius: 18px;
+  background: color-mix(in srgb, currentColor 3%, transparent);
+  border: 1px solid color-mix(in srgb, currentColor 9%, transparent);
+  transition: translate .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.fp-why-item:hover {
+  translate: 0 -3px;
+  border-color: color-mix(in srgb, var(--why-accent) 45%, transparent);
+  box-shadow: 0 12px 30px -12px color-mix(in srgb, var(--why-accent) 40%, transparent);
+}
+.fp-why-ico {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  color: var(--why-ink);
+  background: color-mix(in srgb, var(--why-accent) 14%, transparent);
+}
+.fp-why-item h3 { font-size: 19px; line-height: 1.35; margin: 0 0 8px; }
+.fp-why-item p { margin: 0; font-size: 15.5px; line-height: 1.65; opacity: .75; }
+.fp-why-more { text-align: center; margin: 32px 0 0; }
+.fp-why-more a { color: var(--why-ink); font-weight: 600; text-decoration: none; }
+.fp-why-more a:hover { text-decoration: underline; }
+@media (max-width: 960px) { .fp-why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  .fp-why { margin: 64px auto 56px; padding: 0 16px; }
+  .fp-why-head { margin-bottom: 32px; }
+  .fp-why-grid { grid-template-columns: 1fr; gap: 14px; }
+  .fp-why-item { padding: 22px 20px; }
+}
+
+/* Hiện dần khi cuộn tới (fx.js thêm class .fx-reveal-on vào <html> rồi .is-in cho từng phần tử) */
+/* Chỉ có chuyển động lúc hiện ra; lúc ẩn ban đầu thì ẩn ngay, không nhấp nháy */
+.fx-reveal-on [data-fx-reveal]:not(.is-in) { opacity: 0; transform: translateY(18px); }
+.fx-reveal-on [data-fx-reveal].is-in {
+  transition: opacity .6s ease, transform .6s cubic-bezier(.2, .8, .2, 1), translate .25s ease, border-color .25s ease, box-shadow .25s ease;
+  transition-delay: var(--fx-delay, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-reveal-on [data-fx-reveal] { opacity: 1; transform: none; transition: none; }
+}

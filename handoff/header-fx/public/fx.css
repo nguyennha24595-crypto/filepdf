@@ -1,0 +1,76 @@
+/* ===== Hiệu ứng header: logo bay + nút lên đầu trang (đi kèm /engine/fx.js) ===== */
+
+/* 1. Khung logo lớn trong hero — chiều cao = kích thước logo lớn (~2.5 lần logo header) */
+.fp-hero-logo {
+  --fx-logo-h: 140px;
+  height: var(--fx-logo-h);
+  margin: 8px auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fp-hero-logo img { display: block; height: 100%; width: auto; max-width: 100%; }
+@media (max-width: 640px) {
+  .fp-hero-logo { --fx-logo-h: 84px; margin: 4px auto 12px; }
+}
+
+/* Khi JS chạy: ảnh logo lớn tách khỏi khung (khung vẫn giữ chỗ, không nhảy layout) và bay theo cuộn */
+.fx-logo-on .fp-hero-logo img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  max-width: none;
+  transform-origin: 0 0;
+  will-change: transform;
+  pointer-events: none;
+  z-index: 1000;
+}
+/* Logo header ẩn trong lúc logo lớn đang bay; hiện lại đúng lúc logo bay đã "đậu" vào chỗ */
+.fx-logo-on:not(.fx-logo-docked) .fp-header .fp-logo-img { visibility: hidden; }
+.fx-logo-on.fx-logo-docked .fp-hero-logo img { visibility: hidden; }
+/* Menu thả xuống / menu mobile đang mở thì nằm trên logo bay */
+.fx-logo-on:has(.fp-navitem:hover, .fp-navitem:focus-within, #fp-menu-btn[aria-expanded="true"]) .fp-hero-logo img { z-index: 1; }
+
+/* 2. Nút lên đầu trang */
+.fx-totop {
+  --fx-accent: #4f46e5;
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 900;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--fx-accent);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, .35), 0 2px 6px rgba(0, 0, 0, .12);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px) scale(.9);
+  transition: opacity .25s ease, transform .3s cubic-bezier(.2, .8, .2, 1), visibility 0s linear .3s, box-shadow .2s ease;
+}
+.fx-totop.is-on {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity .25s ease, transform .3s cubic-bezier(.2, .8, .2, 1), visibility 0s, box-shadow .2s ease;
+}
+.fx-totop:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(79, 70, 229, .45), 0 3px 8px rgba(0, 0, 0, .14); }
+.fx-totop:active { transform: translateY(0) scale(.96); }
+.fx-totop:focus-visible { outline: 3px solid rgba(79, 70, 229, .45); outline-offset: 3px; }
+.fx-totop-ico { position: relative; }
+/* Vòng tiến độ cuộn quanh nút */
+.fx-totop-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.fx-totop-ring circle { fill: none; stroke: rgba(255, 255, 255, .25); stroke-width: 2.5; }
+.fx-totop-ring .fx-totop-bar { stroke: #fff; stroke-dasharray: 100; stroke-dashoffset: 100; stroke-linecap: round; }
+@media (max-width: 640px) {
+  .fx-totop { width: 44px; height: 44px; right: max(14px, env(safe-area-inset-right)); bottom: max(14px, env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-totop, .fx-totop.is-on { transition: opacity .15s linear, visibility 0s; transform: none; }
+}

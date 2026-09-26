@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Header FX demo</title>
+<!-- Mô phỏng tối giản header/hero của filecustom.com (site.css thật không có ở đây) -->
+<style>
+  body{margin:0;font-family:system-ui,Segoe UI,Arial,sans-serif;background:#faf9f7;color:#1f2937}
+  .fp-header{position:sticky;top:0;z-index:50;background:rgba(250,249,247,.92);backdrop-filter:blur(8px);border-bottom:1px solid #eee}
+  body.static-header .fp-header{position:static}
+  .fp-header-inner{max-width:1330px;margin:0 auto;height:90px;display:flex;align-items:center;gap:48px;padding:0 24px}
+  .fp-logo-img{height:55px;width:auto;display:block}
+  .fp-nav{display:flex;gap:32px;margin:auto}
+  .fp-navitem{position:relative}.fp-navlink{background:none;border:0;font-size:18px;color:#374151}
+  .fp-dropdown{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid #ddd;padding:16px;width:240px;box-shadow:0 8px 24px #0002}
+  .fp-navitem:hover .fp-dropdown{display:block}
+  .fp-hero{text-align:center;padding:24px 16px 40px}
+  .fp-hero h1{font-size:clamp(28px,4.4vw,56px);margin:0 0 16px}
+  .sub{font-size:20px;color:#4b5563}
+  .btn{display:inline-block;padding:18px 32px;border-radius:10px;background:#4f46e5;color:#fff;text-decoration:none;font-weight:700;margin:16px 8px}
+  .filler{max-width:1330px;margin:0 auto;padding:0 24px}
+  .filler div{height:420px;margin:24px 0;border-radius:16px;background:#fff;border:1px dashed #c7c2f5}
+  @media (max-width:640px){.fp-header-inner{height:64px;gap:12px}.fp-logo-img{height:34px}.fp-nav{display:none}}
+</style>
+<link rel="stylesheet" href="public/fx.css">
+</head>
+<body class="fp-home">
+<header class="fp-header">
+<div class="fp-header-inner">
+<a class="fp-logo" href="#"><img class="fp-logo-img" src="public/brand/logo-demo.svg" alt="FileCustom" width="418" height="128"></a>
+<nav class="fp-nav">
+<div class="fp-navitem"><button class="fp-navlink">Công cụ PDF</button><div class="fp-dropdown">Menu thả xuống</div></div>
+<div class="fp-navitem"><button class="fp-navlink">Word &amp; Excel</button><div class="fp-dropdown">Menu</div></div>
+<div class="fp-navitem"><button class="fp-navlink">Ảnh</button></div>
+<div class="fp-navitem"><button class="fp-navlink">Mã QR</button></div>
+</nav>
+<button id="fp-menu-btn" aria-expanded="false" hidden>≡</button>
+</div>
+</header>
+<main class="wrap">
+<section class="fp-hero">
+<div class="fp-hero-text">
+<div class="fp-hero-logo" aria-hidden="true"><img src="public/brand/logo-demo.svg" alt="" width="418" height="128" fetchpriority="high"></div>
+<h1>Chúng tôi giúp việc xử lý tài liệu dễ dàng hơn.</h1>
+<p class="sub">Miễn phí, không cần đăng ký. File không rời khỏi máy bạn.</p>
+<a href="#fp-workspace" class="btn">Dùng Thử Miễn Phí</a>
+</div>
+</section>
+<div class="filler" id="fp-workspace"><div></div><div></div><div></div><div></div><div></div></div>
+</main>
+<script>if(location.search.indexOf('static')>=0)document.body.classList.add('static-header')</script>
+<script src="public/engine/fx.js"></script>
+</body>
+</html>

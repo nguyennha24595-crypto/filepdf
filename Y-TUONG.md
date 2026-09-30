@@ -31,6 +31,7 @@ Mở rộng cho mục 2 sau khi chạy ổn: khớp đơn hàng theo mã trong n
 
 ## Để dành (chưa làm)
 
+- **Game kiếm hiệp online**: bản thiết kế đầy đủ ở repo `nguyennha24595-crypto/game` (README + docs/01–06). Mốc M0 chính là bãi cỏ + con bò bên dưới.
 - **Game 3D kiểu "bãi cỏ + con bò"** (three.js, host miễn phí trên Cloudflare). Nếu làm thì chia mốc:
   1. nhân vật chạy nhảy trong một bản đồ đẹp, chơi một mình;
   2. một chiêu thức + một loại quái;
